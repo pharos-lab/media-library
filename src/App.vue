@@ -1,7 +1,6 @@
 <template>
-  <div class="test h-[44rem] p-4">
+  <div class="test h-[50rem] p-4">
     <MediaLibrary></MediaLibrary>
-    <Lib></Lib>
   </div>
 </template>
 
