@@ -3,7 +3,7 @@
         <div class="preview grow border-2 p-8"></div>
         <aside class="gallery w-96 border-2 p-4 flex flex-col">
             <h3 class="font-semibold text-slate- mb-8 text-2xl">{{ title || 'Medias' }}</h3>
-            <div class="image-gallery grid grid-cols-2 gap-4 max-h-full overflow-auto">
+            <div class="image-gallery grid grid-cols-2 gap-4 max-h-full overflow-auto mb-8">
                 <input type="file" name="image" id="" class="hidden" ref="fileInput" @change="handleFileInput">
                 <button class="aspect-square bg-emerald-500 text-white flex justify-center items-center" @click="triggerFileInput">
                     <PlusIcon class="size-12"></PlusIcon>
@@ -13,6 +13,7 @@
                     <img :src="image.src" :alt="image.alt" srcset="">
                 </div>
             </div>
+            <button class="px-3 py-2 rounded bg-emerald-500 text-white">save</button>
         </aside>
     </section>
 </template>
@@ -30,12 +31,10 @@ const model = defineModel()
 const fileInput = ref()
 
 const triggerFileInput = () => {
-    console.log('clicked')
     fileInput.value.click()
 }
 
 const handleFileInput = (event) => {
-    console.log('image upload: ' + URL.createObjectURL(event.target.files[0]))
     model.value.push({
         'src': URL.createObjectURL(event.target.files[0]),
         'alt': 'ok',
