@@ -1,5 +1,5 @@
 <template>
-  <div class="test">
+  <div class="test h-[44rem] p-4">
     <MediaLibrary></MediaLibrary>
   </div>
 </template>
@@ -12,9 +12,5 @@ import MediaLibrary from './components/MediaLibrary.vue'
 
 
 <style scoped>
-.test {
-  padding: 25px;
-  border: 1px solid blue;
-  height: 700px
-}
+
 </style>
