@@ -26,6 +26,8 @@ const props = defineProps({
     title: String
 })
 
+const emit = defineEmits(['addFile'])
+
 const model = defineModel()
 
 const fileInput = ref()
@@ -40,5 +42,7 @@ const handleFileInput = (event) => {
         'alt': 'ok',
         'file': event.target.files[0]
     })
+
+    emit('addFile', event.target.files[0])
 }
 </script>

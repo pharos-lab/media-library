@@ -1,6 +1,6 @@
 <template>
   <div class="test h-[50rem] p-4">
-    <MediaLibrary v-model="images"></MediaLibrary>
+    <MediaLibrary v-model="images" @addFile="addFile"></MediaLibrary>
     {{ images }}
   </div>
 </template>
@@ -19,6 +19,10 @@ const items = [
 ]
 
 const images = ref(items)
+
+function addFile(file) {
+  console.log(file)
+}
 </script>
 
 
