@@ -9,7 +9,13 @@
                     <PlusIcon class="size-12"></PlusIcon>
                 </button>
 
-                <button v-for="image in model" class="bg-red-300 aspect-square">
+                <button v-for="image in model" class="bg-red-300 aspect-square group relative">
+                    <div class="absolute size-full group-hover:bg-slate-100/70">
+                        <div class="hidden group-hover:flex justify-end p-2 gap-2">
+                            <PencilSquareIcon class="size-5"></PencilSquareIcon>
+                            <TrashIcon class="size-5"></TrashIcon>
+                        </div>
+                    </div>
                     <img :src="image.src" :alt="image.alt" srcset="" class="h-full w-full object-cover">
                 </button>
             </div>
@@ -20,7 +26,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { PlusIcon } from '@heroicons/vue/24/solid'
+import { PlusIcon, PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/solid'
 
 const props = defineProps({
     title: String
