@@ -9,15 +9,15 @@
                     <PlusIcon class="size-12"></PlusIcon>
                 </button>
 
-                <button v-for="image in model" class="bg-red-300 aspect-square group relative">
+                <div v-for="image in model" class="bg-red-300 aspect-square group relative">
                     <div class="absolute size-full group-hover:bg-slate-100/70">
-                        <div class="hidden group-hover:flex justify-end p-2 gap-2">
-                            <PencilSquareIcon class="size-5"></PencilSquareIcon>
-                            <TrashIcon class="size-5"></TrashIcon>
+                        <div class="hidden group-hover:flex justify-end p-2 gap-2 text-slate-700">
+                            <button><PencilSquareIcon class="size-5 hover:text-slate-800"></PencilSquareIcon></button>
+                            <button><TrashIcon class="size-5 hover:text-slate-800"></TrashIcon></button>
                         </div>
                     </div>
                     <img :src="image.src" :alt="image.alt" srcset="" class="h-full w-full object-cover">
-                </button>
+                </div>
             </div>
             <button class="px-3 py-2 rounded bg-emerald-500 text-white">save</button>
         </aside>
