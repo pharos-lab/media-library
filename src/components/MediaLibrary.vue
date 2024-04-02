@@ -10,7 +10,7 @@
                 </button>
 
                 <div v-for="image in model" class="bg-red-300 aspect-square">
-                    <img :src="image.src" :alt="image.alt" srcset="">
+                    <img :src="image.src" :alt="image.alt" srcset="" class="h-full w-full object-cover">
                 </div>
             </div>
             <button class="px-3 py-2 rounded bg-emerald-500 text-white">save</button>
