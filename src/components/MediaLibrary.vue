@@ -13,7 +13,7 @@
         </div>
         <aside class="gallery w-96 border-2 p-4 flex flex-col">
             <h3 class="font-semibold text-slate- mb-8 text-2xl">{{ title || 'Medias' }}</h3>
-            <div class="image-gallery grid grid-cols-2 gap-4 max-h-full overflow-auto mb-8 grow">
+            <div class="image-gallery grid grid-cols-2 gap-4 max-h-full overflow-auto mb-8 grow auto-rows-min">
                 <input type="file" name="image" id="" class="hidden" ref="fileInput" @change="handleFileInput">
                 <button class="aspect-square bg-emerald-500 text-white flex justify-center items-center" @click="triggerFileInput">
                     <PlusIcon class="size-12"></PlusIcon>

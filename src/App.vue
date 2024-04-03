@@ -11,11 +11,6 @@ import MediaLibrary from './components/MediaLibrary.vue'
 
 
 const items = [
-  {'src': 'ok', 'alt': 'alt text 1'},
-  {'src': 'ok', 'alt': 'alt text 2'},
-  {'src': 'ok', 'alt': 'alt text 3'},
-  {'src': 'ok', 'alt': 'alt text 4'},
-  {'src': 'ok', 'alt': 'alt text 5'},
 ]
 
 const images = ref(items)
