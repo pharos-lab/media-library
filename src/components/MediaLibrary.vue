@@ -1,8 +1,11 @@
 <template>
     <section class="media-library flex gap-2 h-full">
         <div class="preview grow border-2 p-8 flex flex-col gap-8 h-full">
-            <div class="images grow p-8 bg-slate-100 self-stretch">    
-                <img :src="currentPreview?.src" :alt="currentPreview?.alt" srcset="" class="object-contain size-full">
+            <div class="images grow p-8 bg-slate-100 self-stretch flex justify-center items-center">    
+                <img :src="currentPreview?.src" :alt="currentPreview?.alt" srcset="" class="object-contain size-full hidden" ref="newImage"> 
+                <canvas class="image-canvas max-h-full max-h-full bg-slate-400" ref="canvas">
+                    
+                </canvas>
             </div>
             <div class="controls flex gap-4 justify-center bg-slate-100 p-8">
                 <div v-for="n in 10">ok</div>
@@ -44,12 +47,21 @@ const emit = defineEmits(['addFile', 'deleteFile', 'saveFiles'])
 const model = defineModel()
 
 const fileInput = ref()
+const newImage = ref()
+const canvas = ref()
 
 const currentPreview = ref(model.value[0])
 
 
 const preview = (index) => {
     currentPreview.value = model.value[index] ?? model.value[0]
+    const image = new Image()
+    image.src = model.value[index].src
+    canvas.value.width = image.width
+    canvas.value.height = image.height
+    const ctx = canvas.value.getContext('2d')
+    console.log(ctx)
+    ctx.drawImage(image, 0, 0)
 }
 
 const triggerFileInput = () => {
@@ -57,6 +69,7 @@ const triggerFileInput = () => {
 }
 
 const handleFileInput = (event) => {
+    console.log(event.target.files[0])
     model.value.push({
         'src': URL.createObjectURL(event.target.files[0]),
         'alt': 'ok',
