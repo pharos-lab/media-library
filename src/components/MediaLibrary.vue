@@ -1,10 +1,10 @@
 <template>
     <section class="media-library flex gap-2 h-full">
-        <div class="preview grow border-2 p-8 flex flex-col items-center gap-8 h-full">
+        <div class="preview grow border-2 p-8 flex flex-col gap-8 h-full">
             <div class="images grow p-8 bg-slate-100 self-stretch">    
                 <img :src="currentPreview?.src" :alt="currentPreview?.alt" srcset="" class="object-contain size-full">
             </div>
-            <div class="controls flex gap-4 mb-8">
+            <div class="controls flex gap-4 justify-center bg-slate-100 p-8">
                 <div v-for="n in 10">ok</div>
 
             </div>
