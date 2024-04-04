@@ -5,8 +5,10 @@
                 <canvas class="image-canvas max-w-full max-h-full bg-slate-400" ref="canvas" width="800px" height="600px">
                     
                 </canvas>
+                <img :src="canvaToImg" alt="" class="w-1/3">
             </div>
             <div class="controls flex gap-4 justify-center bg-slate-100 p-8">
+                <button @click="save">save</button>
                 <div v-for="n in 10">ok</div>
 
             </div>
@@ -28,7 +30,6 @@
                     <img :src="image.src" :alt="image.alt" srcset="" class="h-full w-full object-cover">
                 </div>
             </div>
-            <button class="px-3 py-2 rounded bg-emerald-500 text-white" @click="saveFiles">save</button>
         </aside>
     </section>
 </template>
@@ -46,7 +47,7 @@ const emit = defineEmits(['addFile', 'deleteFile', 'saveFiles'])
 const model = defineModel()
 
 const fileInput = ref()
-const newImage = ref()
+const canvaToImg = ref()
 const canvas = ref()
 
 const currentPreview = ref(model.value[0])
@@ -55,7 +56,7 @@ const currentPreview = ref(model.value[0])
 const preview = (index) => {
     currentPreview.value = model.value[index] ?? model.value[0]
     const image = new Image()
-    image.src = model.value[index].src
+    image.src = model.value[index]?.src ?? 'placeholder-image.png'
     canvas.value.width = image.width
     canvas.value.height = image.height
     const ctx = canvas.value.getContext('2d')
@@ -67,7 +68,6 @@ const triggerFileInput = () => {
 }
 
 const handleFileInput = (event) => {
-    console.log(event.target.files[0])
     model.value.push({
         'src': URL.createObjectURL(event.target.files[0]),
         'alt': 'ok',
@@ -83,8 +83,13 @@ const handleDelete = (index) => {
     model.value.splice(index, 1)
 }
 
-const saveFiles = () => {
-    emit('saveFiles')
+const save = () => {
+    console.log(canvas.value)
+    canvas.value.toBlob((blob) => {
+        let file = new File([blob], "fileName.jpg", { type: "image/jpeg" })
+        console.log(file)
+        canvaToImg.value = URL.createObjectURL(file)
+    }, 'image/jpeg');
 }
 </script>
 

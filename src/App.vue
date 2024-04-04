@@ -20,7 +20,7 @@ function addFile(file) {
 }
 
 function deleteFile(file) {
-  console.log(file.alt)
+  console.log(file.alt + ' deleted')
 }
 </script>
 
