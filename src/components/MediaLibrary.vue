@@ -1,19 +1,28 @@
 <template>
     <section class="media-library flex gap-2 h-full">
         <div class="preview grow border-2 p-8 flex flex-col gap-8 h-full">
-            <div class="images grow p-8 bg-slate-100 self-stretch flex justify-center items-center">    
-                <canvas class="image-canvas max-w-full max-h-full bg-slate-400" ref="canvas" width="800px" height="600px">
-                    
-                </canvas>
+            <div class="images grow p-8 bg-slate-100 self-stretch flex">    
+                <div v-show="sidePanel == 'crop'" class="w-64 bg-red-500 self-stretch">
+                    CROP
+                </div>
+
+                <div v-show="sidePanel == 'rotate'" class="w-64 bg-red-500 self-stretch">
+                    ROTATE
+                </div>
+
+                <div class="grow flex items-center justify-center">
+                    <canvas class="image-canvas max-w-full max-h-full bg-slate-400 " ref="canvas" width="800px" height="600px"></canvas>
+                </div>
             </div>
+
             <div class="controls flex gap-4 justify-center bg-slate-100 p-8">
-                <button title="crop image">
+                <button title="crop image" @click="open('crop')">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5">
                         <path d="M128 32c0-17.7-14.3-32-32-32S64 14.3 64 32V64H32C14.3 64 0 78.3 0 96s14.3 32 32 32H64V384c0 35.3 28.7 64 64 64H352V384H128V32zM384 480c0 17.7 14.3 32 32 32s32-14.3 32-32V448h32c17.7 0 32-14.3 32-32s-14.3-32-32-32H448l0-256c0-35.3-28.7-64-64-64L160 64v64l224 0 0 352z"/>
                     </svg>
                 </button>
 
-                <button title="">
+                <button title="" @click="open('rotate')">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-5">
                         <path d="M105.1 202.6c7.7-21.8 20.2-42.3 37.8-59.8c62.5-62.5 163.8-62.5 226.3 0L386.3 160H352c-17.7 0-32 14.3-32 32s14.3 32 32 32H463.5c0 0 0 0 0 0h.4c17.7 0 32-14.3 32-32V80c0-17.7-14.3-32-32-32s-32 14.3-32 32v35.2L414.4 97.6c-87.5-87.5-229.3-87.5-316.8 0C73.2 122 55.6 150.7 44.8 181.4c-5.9 16.7 2.9 34.9 19.5 40.8s34.9-2.9 40.8-19.5zM39 289.3c-5 1.5-9.8 4.2-13.7 8.2c-4 4-6.7 8.8-8.1 14c-.3 1.2-.6 2.5-.8 3.8c-.3 1.7-.4 3.4-.4 5.1V432c0 17.7 14.3 32 32 32s32-14.3 32-32V396.9l17.6 17.5 0 0c87.5 87.4 229.3 87.4 316.7 0c24.4-24.4 42.1-53.1 52.9-83.7c5.9-16.7-2.9-34.9-19.5-40.8s-34.9 2.9-40.8 19.5c-7.7 21.8-20.2 42.3-37.8 59.8c-62.5 62.5-163.8 62.5-226.3 0l-.1-.1L125.6 352H160c17.7 0 32-14.3 32-32s-14.3-32-32-32H48.4c-1.6 0-3.2 .1-4.8 .3s-3.1 .5-4.6 1z"/>
                     </svg>
@@ -75,6 +84,7 @@ const model = defineModel()
 const fileInput = ref()
 const canvaToImg = ref()
 const canvas = ref()
+const sidePanel = ref()
 
 const currentPreview = ref(model.value[0])
 
@@ -115,6 +125,10 @@ const save = () => {
         canvaToImg.value = URL.createObjectURL(file)
         emit('saveImage', file)
     }, 'image/jpeg');
+}
+
+const open = (panel) => {
+    sidePanel.value = panel
 }
 </script>
 
