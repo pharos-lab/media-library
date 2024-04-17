@@ -22,6 +22,7 @@
 
                 <div class="grow flex items-center justify-center">
                     <canvas class="image-canvas max-w-full max-h-full bg-slate-400 " ref="canvas" width="800px" height="600px"></canvas>
+                    <img :src="canvasToImg"/>
                 </div>
             </div>
 
@@ -97,21 +98,21 @@ const emit = defineEmits(['addFile', 'deleteFile', 'saveFiles'])
 const model = defineModel()
 
 const fileInput = ref()
-const canvaToImg = ref()
+const canvasToImg = ref()
 const canvas = ref()
 const sidePanel = ref()
-
 const currentPreview = ref(model.value[0])
+const currentImage = ref()
 
 
 const preview = (index) => {
     currentPreview.value = model.value[index] ?? model.value[0]
-    const image = new Image()
-    image.src = model.value[index]?.src ?? 'placeholder-image.png'
-    canvas.value.width = image.width
-    canvas.value.height = image.height
+    currentImage.value = new Image()
+    currentImage.value.src = model.value[index]?.src ?? 'placeholder-image.png'
+    canvas.value.width = currentImage.value.width
+    canvas.value.height = currentImage.value.height
     const ctx = canvas.value.getContext('2d')
-    ctx.drawImage(image, 0, 0)
+    ctx.drawImage(currentImage.value, 0, 0)
     ctx.save()
 }
 
@@ -138,7 +139,7 @@ const handleDelete = (index) => {
 const save = () => {
     canvas.value.toBlob((blob) => {
         let file = new File([blob], "fileName.jpg", { type: "image/jpeg" })
-        canvaToImg.value = URL.createObjectURL(file)
+        canvasToImg.value = URL.createObjectURL(file)
         emit('saveImage', file)
     }, 'image/jpeg');
 }
@@ -152,7 +153,13 @@ const rotateLeft = () => {
 }
 
 const rotateRight = () => {
-    console.log('rotate right')
+    const radians = 0
+    const ctx = canvas.value.getContext('2d')
+    ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
+    //ctx.translate(canvas.value.width, 0);
+    ctx.rotate((180 * Math.PI) / 180)
+    ctx.drawImage(currentImage.value, 0, 0)
+    ctx.save()
 }
 
 </script>
