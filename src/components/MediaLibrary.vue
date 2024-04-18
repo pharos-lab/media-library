@@ -104,6 +104,7 @@ const sidePanel = ref()
 const currentPreview = ref(model.value[0])
 const currentImage = ref()
 const rotation = ref(0)
+const canvasContext = ref()
 
 
 const preview = (index) => {
@@ -112,9 +113,9 @@ const preview = (index) => {
     currentImage.value.src = model.value[index]?.src ?? 'placeholder-image.png'
     canvas.value.width = currentImage.value.width
     canvas.value.height = currentImage.value.height
-    const ctx = canvas.value.getContext('2d')
-    ctx.drawImage(currentImage.value, 0, 0)
-    ctx.save()
+    canvasContext.value = canvas.value.getContext('2d')
+    canvasContext.value.drawImage(currentImage.value, 0, 0)
+    canvasContext.value.save()
 }
 
 const triggerFileInput = () => {
@@ -154,30 +155,61 @@ const rotateLeft = () => {
 }
 
 const rotateRight = () => {
-    console.log(rotation.value)
     const ctx = canvas.value.getContext('2d')
     if (rotation.value == 0 ) {
+        console.log('ok 0')
+
         const size = [canvas.value.width, canvas.value.height]
         canvas.value.width = size[1]
         canvas.value.height = size[0]
         //ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
-        ctx.translate(canvas.value.width, 0);
-        ctx.rotate((90 * Math.PI) / 180)
-        ctx.drawImage(currentImage.value, 0, 0)
-        ctx.save()
+        canvasContext.value.translate(canvas.value.width, 0);
+        canvasContext.value.rotate((90 * Math.PI) / 180)
+        canvasContext.value.drawImage(currentImage.value, 0, 0)
+        canvasContext.value.save()
         rotation.value = 90
+        console.log('now 90')
+
     } else if (rotation.value == 90) {
+        console.log('ok 90')
+
         const size = [canvas.value.width, canvas.value.height]
         canvas.value.width = size[1]
         canvas.value.height = size[0]
         //ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
-        ctx.translate(canvas.value.width, canvas.value.height);
-        ctx.rotate((180 * Math.PI) / 180)
-        ctx.drawImage(currentImage.value, 0, 0)
-        ctx.save()
-        console.log(ctx)
+        canvasContext.value.translate(canvas.value.width, canvas.value.height);
+        canvasContext.value.rotate((180 * Math.PI) / 180)
+        canvasContext.value.drawImage(currentImage.value, 0, 0)
+        canvasContext.value.save()
         rotation.value = 180
+        console.log('now 180')
+
     } else if (rotation.value == 180) {
+        console.log('ok 180')
+
+        const size = [canvas.value.width, canvas.value.height]
+        canvas.value.width = size[1]
+        canvas.value.height = size[0]
+        //ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
+        canvasContext.value.translate(0,canvas.value.height);
+        canvasContext.value.rotate((270 * Math.PI) / 180)
+        canvasContext.value.drawImage(currentImage.value, 0, 0)
+        canvasContext.value.save()
+        rotation.value = 270
+        console.log('now 270')
+
+    } else if(rotation.value == 270) {
+        console.log('ok 270')
+        const size = [canvas.value.width, canvas.value.height]
+        canvas.value.width = size[1]
+        canvas.value.height = size[0]
+        //ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
+        canvasContext.value.translate(0,0);
+        canvasContext.value.rotate((360 * Math.PI) / 180)
+        canvasContext.value.drawImage(currentImage.value, 0, 0)
+        canvasContext.value.save()
+        rotation.value = 0
+        console.log('now 0')
 
     }
 }
