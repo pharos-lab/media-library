@@ -103,6 +103,7 @@ const canvas = ref()
 const sidePanel = ref()
 const currentPreview = ref(model.value[0])
 const currentImage = ref()
+const rotation = ref(0)
 
 
 const preview = (index) => {
@@ -153,13 +154,30 @@ const rotateLeft = () => {
 }
 
 const rotateRight = () => {
-    const radians = 0
-    const ctx = canvas.value.getContext('2d')
-    ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
-    //ctx.translate(canvas.value.width, 0);
-    ctx.rotate((180 * Math.PI) / 180)
-    ctx.drawImage(currentImage.value, 0, 0)
-    ctx.save()
+    console.log(rotation.value)
+    if (rotation.value == 0 ) {
+        const size = [canvas.value.width, canvas.value.height]
+        const ctx = canvas.value.getContext('2d')
+        canvas.value.width = size[1]
+        canvas.value.height = size[0]
+        ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
+        ctx.translate(canvas.value.width, 0);
+        ctx.rotate((90 * Math.PI) / 180)
+        ctx.drawImage(currentImage.value, 0, 0)
+        ctx.save()
+        rotation.value = 90
+    } else if (rotation.value == 90) {
+        const size = [canvas.value.width, canvas.value.height]
+        const ctx = canvas.value.getContext('2d')
+        canvas.value.width = size[1]
+        canvas.value.height = size[0]
+        ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
+        ctx.translate(0, canvas.value.height);
+        ctx.rotate((90 * Math.PI) / 180)
+        ctx.drawImage(currentImage.value, 0, 0)
+        ctx.save()
+        rotation.value = 180
+    }
 }
 
 </script>
