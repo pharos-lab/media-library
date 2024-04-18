@@ -63,7 +63,7 @@
                 </button>
             </div>
         </div>
-        <aside class="gallery w-96 border-2 p-4 flex flex-col">
+        <aside class="gallery w-96 shrink-0 border-2 p-4 flex flex-col">
         
             <h3 class="font-semibold text-slate- mb-8 text-2xl">{{ title || 'Medias' }}</h3>
             <div class="image-gallery grid grid-cols-2 gap-4 max-h-full overflow-auto mb-8 grow auto-rows-min">
