@@ -155,71 +155,30 @@ const rotateLeft = () => {
 }
 
 const rotateRight = () => {
-    const ctx = canvas.value.getContext('2d')
-    if (rotation.value == 0 ) {
-        console.log('ok 0')
+    const size = [canvas.value.width, canvas.value.height]
+    canvas.value.width = size[1]
+    canvas.value.height = size[0]
 
-        const size = [canvas.value.width, canvas.value.height]
-        canvas.value.width = size[1]
-        canvas.value.height = size[0]
-        //ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
+    if (rotation.value == 0 ) {
         canvasContext.value.translate(canvas.value.width, 0);
         canvasContext.value.rotate((90 * Math.PI) / 180)
-        canvasContext.value.drawImage(currentImage.value, 0, 0)
-        canvasContext.value.save()
         rotation.value = 90
-        console.log('now 90')
-
     } else if (rotation.value == 90) {
-        console.log('ok 90')
-
-        const size = [canvas.value.width, canvas.value.height]
-        canvas.value.width = size[1]
-        canvas.value.height = size[0]
-        //ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
         canvasContext.value.translate(canvas.value.width, canvas.value.height);
         canvasContext.value.rotate((180 * Math.PI) / 180)
-        canvasContext.value.drawImage(currentImage.value, 0, 0)
-        canvasContext.value.save()
         rotation.value = 180
-        console.log('now 180')
-
     } else if (rotation.value == 180) {
-        console.log('ok 180')
-
-        const size = [canvas.value.width, canvas.value.height]
-        canvas.value.width = size[1]
-        canvas.value.height = size[0]
-        //ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
         canvasContext.value.translate(0,canvas.value.height);
         canvasContext.value.rotate((270 * Math.PI) / 180)
-        canvasContext.value.drawImage(currentImage.value, 0, 0)
-        canvasContext.value.save()
         rotation.value = 270
-        console.log('now 270')
-
     } else if(rotation.value == 270) {
-        console.log('ok 270')
-        const size = [canvas.value.width, canvas.value.height]
-        canvas.value.width = size[1]
-        canvas.value.height = size[0]
-        //ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
         canvasContext.value.translate(0,0);
         canvasContext.value.rotate((360 * Math.PI) / 180)
-        canvasContext.value.drawImage(currentImage.value, 0, 0)
-        canvasContext.value.save()
         rotation.value = 0
-        console.log('now 0')
-
     }
+    canvasContext.value.drawImage(currentImage.value, 0, 0)
 }
 
-const undo = () => {
-    console.log('undo')
-    const ctx = canvas.value.getContext('2d')
-    ctx.restore()
-    ctx.drawImage(currentImage.value, 0, 0)
-}
 </script>
 
 <style scoped>
