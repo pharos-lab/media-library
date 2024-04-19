@@ -150,10 +150,6 @@ const open = (panel) => {
     sidePanel.value = panel
 }
 
-const rotateLeft = () => {
-    console.log('rotate left')
-}
-
 const rotateRight = () => {
     const size = [canvas.value.width, canvas.value.height]
     canvas.value.width = size[1]
@@ -179,6 +175,31 @@ const rotateRight = () => {
     canvasContext.value.drawImage(currentImage.value, 0, 0)
 }
 
+
+const rotateLeft = () => {
+    const size = [canvas.value.width, canvas.value.height]
+    canvas.value.width = size[1]
+    canvas.value.height = size[0]
+
+    if (rotation.value == 0 ) {
+        canvasContext.value.translate(0, canvas.value.height);
+        canvasContext.value.rotate((270 * Math.PI) / 180)
+        rotation.value = 90
+    } else if (rotation.value == 90) {
+        canvasContext.value.translate(canvas.value.width, canvas.value.height);
+        canvasContext.value.rotate((180 * Math.PI) / 180)
+        rotation.value = 180
+    } else if (rotation.value == 180) {
+        canvasContext.value.translate(canvas.value.width, 0);
+        canvasContext.value.rotate((90 * Math.PI) / 180)
+        rotation.value = 270
+    } else if(rotation.value == 270) {
+        canvasContext.value.translate(0,0);
+        canvasContext.value.rotate((360 * Math.PI) / 180)
+        rotation.value = 0
+    }
+    canvasContext.value.drawImage(currentImage.value, 0, 0)
+}
 </script>
 
 <style scoped>
