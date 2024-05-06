@@ -20,9 +20,9 @@
                     </button>
                 </div>
 
-                <div class="grow flex items-center justify-center">
-                    <canvas class="image-canvas max-w-full max-h-full bg-slate-400 " ref="canvas" width="800px" height="600px"></canvas>
-                    <img :src="canvasToImg"/>
+                <div class="grow flex items-center justify-center relative">
+                        <canvas class="image-canvas max-w-full max-h-full bg-slate-400 " ref="canvas" width="600px" height="400px"></canvas>
+                        <div class="crop-image absolute bg-red-100  max-w-full max-h-full" ref="cropImage"></div> 
                 </div>
             </div>
 
@@ -105,6 +105,7 @@ const currentPreview = ref(model.value[0])
 const currentImage = ref()
 const rotation = ref(0)
 const canvasContext = ref()
+const cropImage = ref()
 
 
 const preview = (index) => {
@@ -113,6 +114,9 @@ const preview = (index) => {
     currentImage.value.src = model.value[index]?.src ?? 'placeholder-image.png'
     canvas.value.width = currentImage.value.width
     canvas.value.height = currentImage.value.height
+    console.log(canvas.value)
+    cropImage.value.style.width = canvas.value.offsetWidth + 'px'
+    cropImage.value.style.height = canvas.value.offsetHeight + 'px'
     canvasContext.value = canvas.value.getContext('2d')
     canvasContext.value.drawImage(currentImage.value, 0, 0)
     canvasContext.value.save()
