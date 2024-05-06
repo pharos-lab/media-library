@@ -158,6 +158,8 @@ const rotateRight = () => {
     const size = [canvas.value.width, canvas.value.height]
     canvas.value.width = size[1]
     canvas.value.height = size[0]
+    cropImage.value.style.width = canvas.value.offsetWidth + 'px'
+    cropImage.value.style.height = canvas.value.offsetHeight + 'px'
 
     if (rotation.value == 0 ) {
         canvasContext.value.translate(canvas.value.width, 0);
@@ -184,6 +186,8 @@ const rotateLeft = () => {
     const size = [canvas.value.width, canvas.value.height]
     canvas.value.width = size[1]
     canvas.value.height = size[0]
+    cropImage.value.style.width = canvas.value.offsetWidth + 'px'
+    cropImage.value.style.height = canvas.value.offsetHeight + 'px'
 
     if (rotation.value == 0 ) {
         canvasContext.value.translate(0, canvas.value.height);
