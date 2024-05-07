@@ -1,11 +1,7 @@
 <template>
     <section class="media-library flex gap-2 h-full">
         <div class="preview grow border-2 p-8 flex flex-col gap-8 h-full">
-            <div class="images grow p-8 bg-slate-100 self-stretch flex">    
-                <div v-show="sidePanel == 'crop'" class="w-64 bg-red-500 self-stretch">
-                    CROP
-                </div>
-
+            <div class="images grow p-8 bg-slate-100 self-stretch flex">
                 <div v-show="sidePanel == 'rotate'" class="w-64 bg-red-500 self-stretch">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="size-7" @click="rotateLeft">
@@ -22,7 +18,12 @@
 
                 <div class="grow flex items-center justify-center relative">
                         <canvas class="image-canvas max-w-full max-h-full bg-slate-400 " ref="canvas" width="600px" height="400px"></canvas>
-                        <div class="crop-image absolute bg-red-100  max-w-full max-h-full" ref="cropImage"></div> 
+                        <div class="crop-image absolute bg-red-100  max-w-full max-h-full" ref="cropImage" v-show="sidePanel == 'crop'">
+                            <div class="absolute w-4 h-4 rounded-full bg-slate-500 top-1/2 -left-1 -mt-2">1</div>
+                            <div class="absolute w-4 h-4 rounded-full bg-slate-500 -top-1 right-1/2 -mr-2">1</div>
+                            <div class="absolute w-4 h-4 rounded-full bg-slate-500 top-1/2 -right-1 -mt-2">1</div>
+                            <div class="absolute w-4 h-4 rounded-full bg-slate-500 -bottom-1 right-1/2 -mr-2">1</div>
+                        </div> 
                 </div>
             </div>
 

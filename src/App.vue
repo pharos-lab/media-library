@@ -1,5 +1,5 @@
 <template>
-  <div class="test h-[50rem] p-4">
+  <div class="test h-[40rem] p-4">
     <MediaLibrary v-model="images" @addFile="addFile" @deleteFile="deleteFile"></MediaLibrary>
     {{ images }}
   </div>
