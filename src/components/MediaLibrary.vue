@@ -19,10 +19,10 @@
                 <div class="grow flex items-center justify-center relative">
                         <canvas class="image-canvas max-w-full max-h-full bg-slate-400 " ref="canvas" width="600px" height="400px"></canvas>
                         <div class="crop-image absolute bg-red-100  max-w-full max-h-full" ref="cropImage" v-show="sidePanel == 'crop'">
-                            <div class="absolute w-4 h-4 rounded-full bg-slate-500 top-1/2 -left-1 -mt-2">1</div>
-                            <div class="absolute w-4 h-4 rounded-full bg-slate-500 -top-1 right-1/2 -mr-2">1</div>
-                            <div class="absolute w-4 h-4 rounded-full bg-slate-500 top-1/2 -right-1 -mt-2">1</div>
-                            <div class="absolute w-4 h-4 rounded-full bg-slate-500 -bottom-1 right-1/2 -mr-2">1</div>
+                            <div class="absolute w-4 h-4 rounded-full bg-slate-500 top-1/2 -left-1 -mt-2 cursor-ew-resize">1</div>
+                            <div class="absolute w-4 h-4 rounded-full bg-slate-500 -top-1 right-1/2 -mr-2 cursor-ns-resize">1</div>
+                            <div class="absolute w-4 h-4 rounded-full bg-slate-500 top-1/2 -right-1 -mt-2 cursor-ew-resize">1</div>
+                            <div class="absolute w-4 h-4 rounded-full bg-slate-500 -bottom-1 right-1/2 -mr-2 cursor-ns-resize">1</div>
                         </div> 
                 </div>
             </div>
